@@ -1,4 +1,4 @@
-package com.ucc.backend;
+package com.birducc.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
