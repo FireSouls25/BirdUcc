@@ -29,11 +29,15 @@ const Title = styled.h1`
 `;
 
 const LogoImg = styled.img`
-  height: 60px;
-  width: 60px;
+  height: 40px;
+  width: 40px;
   object-fit: contain;
   margin-left: 10px;
   display: ${props => props.isExpanded ? 'block' : 'none'};
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.1) rotate(-5deg);
+  }
 `;
 
 const AppsContainer = styled.div`
@@ -53,10 +57,11 @@ const AppButton = styled.button`
   cursor: pointer;
   padding: 10px;
   width: 100%;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s, box-shadow 0.2s;
 
   &:hover {
     background-color: #34495e;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   }
 `;
 
@@ -65,6 +70,10 @@ const AppIcon = styled.div`
   min-width: 24px;
   display: flex;
   justify-content: center;
+  transition: transform 0.2s;
+  ${AppButton}:hover & {
+    transform: scale(1.2);
+  }
 `;
 
 const AppName = styled.span`
@@ -92,6 +101,10 @@ const UccLogoImg = styled.img`
   width: 36px;
   object-fit: contain;
   margin-right: 10px;
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.1) rotate(-5deg);
+  }
 `;
 
 const UccText = styled.span`
