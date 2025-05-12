@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import AppSidebar from './AppSidebar';
-import ChatWindow from './ChatWindow';
+import TelegramClient from './TelegramClient';
 
 const Layout = styled.div`
   display: flex;
@@ -9,26 +9,46 @@ const Layout = styled.div`
   width: 100vw;
 `;
 
-const ContactsContainer = styled.div`
-  width: 280px;
-  border-right: 1px solid #dee2e6;
-`;
-
-const ChatContainer = styled.div`
+const ContentContainer = styled.div`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  background-color: #f5f6f8;
 `;
 
 export default function MainLayout() {
+  const [selectedApp, setSelectedApp] = useState(null);
+
+  const handleAppSelect = (appName) => {
+    setSelectedApp(appName);
+  };
+
+  const renderAppContent = () => {
+    switch (selectedApp) {
+      case 'telegram':
+        return <TelegramClient />;
+      default:
+        return (
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            height: '100%',
+            color: '#666',
+            fontSize: '1.2rem'
+          }}>
+            Select an app from the sidebar
+          </div>
+        );
+    }
+  };
+
   return (
     <Layout>
-      <ContactsContainer>
-        <AppSidebar />
-      </ContactsContainer>
-      <ChatContainer>
-        <ChatWindow />
-      </ChatContainer>
+      <AppSidebar onAppSelect={handleAppSelect} />
+      <ContentContainer>
+        {renderAppContent()}
+      </ContentContainer>
     </Layout>
   );
 }
