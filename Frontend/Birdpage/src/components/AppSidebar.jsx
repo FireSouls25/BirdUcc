@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FaTelegram } from 'react-icons/fa';
+import { FaTelegram, FaDiscord, FaWhatsapp } from 'react-icons/fa';
 import birduccLogo from '../assets/birducc_logo.png';
 import uccLogo from '../assets/ucc_logo.png';
 
@@ -29,8 +29,8 @@ const Title = styled.h1`
 `;
 
 const LogoImg = styled.img`
-  height: 40px;
-  width: 40px;
+  height: 65px;
+  width: 65px;
   object-fit: contain;
   margin-left: 10px;
   display: ${props => props.isExpanded ? 'block' : 'none'};
@@ -97,8 +97,8 @@ const BottomContainer = styled.div`
 `;
 
 const UccLogoImg = styled.img`
-  height: 36px;
-  width: 36px;
+  height: 42px;
+  width: 42px;
   object-fit: contain;
   margin-right: 10px;
   transition: transform 0.2s;
@@ -133,6 +133,18 @@ export default function AppSidebar({ onAppSelect }) {
             <FaTelegram />
           </AppIcon>
           <AppName isExpanded={isExpanded}>Telegram</AppName>
+        </AppButton>
+        <AppButton onClick={() => onAppSelect('discord')}>
+          <AppIcon>
+            <FaDiscord />
+          </AppIcon>
+          <AppName isExpanded={isExpanded}>Discord</AppName>
+        </AppButton>
+        <AppButton onClick={() => onAppSelect('whatsapp')}>
+          <AppIcon>
+            <FaWhatsapp />
+          </AppIcon>
+          <AppName isExpanded={isExpanded}>WhatsApp</AppName>
         </AppButton>
       </AppsContainer>
       <BottomContainer>

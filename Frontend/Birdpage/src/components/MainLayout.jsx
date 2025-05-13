@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import AppSidebar from './AppSidebar';
 import TelegramClient from './TelegramClient';
+import DiscordClient from './DiscordClient';
+import WhatsAppClient from './WhatsAppClient';
 
 const Layout = styled.div`
   display: flex;
@@ -27,6 +29,10 @@ export default function MainLayout() {
     switch (selectedApp) {
       case 'telegram':
         return <TelegramClient />;
+      case 'discord':
+        return <DiscordClient />;
+      case 'whatsapp':
+        return <WhatsAppClient />;
       default:
         return (
           <div style={{ 
