@@ -27,4 +27,9 @@ public class Message {
 
     public String getPlatform() { return platform; }
     public void setPlatform(String platform) { this.platform = platform; }
+
+    public void setStatus(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setStatus'");
+    }
 }
