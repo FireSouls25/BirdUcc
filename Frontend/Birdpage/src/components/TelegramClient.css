@@ -1,0 +1,155 @@
+.telegram-client {
+    display: flex;
+    height: 100%;
+    background-color: #f5f6f8;
+}
+
+.telegram-auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.telegram-auth form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.telegram-auth h2 {
+    margin: 0;
+    color: #333;
+    text-align: center;
+}
+
+.telegram-auth input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.telegram-auth button {
+    padding: 12px;
+    background-color: #0088cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.telegram-auth button:hover {
+    background-color: #0077b3;
+}
+
+.chats-list {
+    width: 300px;
+    border-right: 1px solid #ddd;
+    background-color: white;
+    overflow-y: auto;
+}
+
+.chats-list h2 {
+    padding: 15px;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+.chat-item {
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+.chat-item:hover {
+    background-color: #f5f6f8;
+}
+
+.chat-item.selected {
+    background-color: #e3f2fd;
+}
+
+.chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 70%;
+}
+
+.message-content {
+    word-wrap: break-word;
+}
+
+.message-input {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    gap: 10px;
+}
+
+.message-input input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.message-input button {
+    padding: 12px 24px;
+    background-color: #0088cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.message-input button:hover {
+    background-color: #0077b3;
+}
+
+.no-chat-selected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.error {
+    color: #dc3545;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    text-align: center;
+} 
