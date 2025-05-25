@@ -1,0 +1,32 @@
+package com.birducc.dto;
+
+public class MessagePayload {
+    private String chatId;
+    private String text;
+    private String platform; // ← Campo necesario para corregir tu error
+
+    // Getters y setters
+    public String getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(String chatId) {
+        this.chatId = chatId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+}
