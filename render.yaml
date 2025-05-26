@@ -3,6 +3,6 @@ services:
     name: birducc-backend
     env: java
     plan: free
-    buildCommand: mvn clean install
+    buildCommand: ./mvn clean install
     startCommand: java -jar target/*.jar
     rootDir: backend
