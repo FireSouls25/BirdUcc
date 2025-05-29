@@ -1,8 +1,8 @@
-# Imagen base con Java 17 y APT (basada en Debian)
+# Imagen base con Java 17
 FROM eclipse-temurin:17-jdk
 
-# Instala Node.js 22 y herramientas necesarias
-RUN apt-get update && apt-get install -y curl gnupg \
+# Instala Node.js 22 y Maven
+RUN apt-get update && apt-get install -y curl gnupg maven \
   && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
   && apt-get install -y nodejs \
   && apt-get clean \
