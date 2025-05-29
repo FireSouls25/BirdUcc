@@ -3,14 +3,8 @@ services:
     name: birducc-backend
     env: java
     plan: free
-    buildCommand: ./mvnw clean install
-    startCommand: java -jar target/*.jar # Cambia a target/*.jar si usas Maven
+    buildCommand: cd birducc && ./mvnw clean install
+    startCommand: java -jar birducc/target/*.jar
     envVars:
-      - key: TELEGRAM_BOT_TOKEN
-        value: 7522338966:AAE10lRUZdoaZ70EOlVbLAUOrUPUpWyEeNw
-      - key: DISCORD_BOT_TOKEN
-        value: fjm8iz_MC8920ojyWFQ8NMOnexRfYL9YpCz1MP2wCbMwsrcp7NQD5wozPkPn6AttHQ1D
-      - key: WHATSAPP_SECRET
-        value: 
-      - key: SERVER_PORT
-        value: 3000
+      - key: JAVA_VERSION
+        value: 17
