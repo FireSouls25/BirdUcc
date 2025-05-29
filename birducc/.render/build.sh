@@ -1,10 +1,22 @@
 #!/bin/bash
 
-# Da permisos de ejecución al wrapper de Maven
 chmod +x ./mvnw
 
-# Usa Java 17 proporcionado por Render
-export JAVA_HOME=$JAVA17_HOME
+# Si JAVA17_HOME está definido, úsalo, si no intenta usar java instalado por defecto
+if [ -z "$JAVA17_HOME" ]; then
+  echo "JAVA17_HOME no está definido, buscando java en PATH..."
+  JAVA_PATH=$(which java)
+  if [ -z "$JAVA_PATH" ]; then
+    echo "Error: java no encontrado en PATH"
+    exit 1
+  fi
+  JAVA_HOME=$(dirname $(dirname $JAVA_PATH))
+  export JAVA_HOME
+else
+  export JAVA_HOME=$JAVA17_HOME
+fi
 
-# Ejecuta la build
+echo "JAVA_HOME = $JAVA_HOME"
+java -version
+
 ./mvnw clean package
