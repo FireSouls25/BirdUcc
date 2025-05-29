@@ -1,9 +1,7 @@
 #!/bin/bash
-
-set -e  # Detiene el script si ocurre un error
-
+set -e
 echo "=== Entrando al directorio del proyecto ==="
-cd birducc
+cd /app
 
 echo "=== Iniciando build con Maven ==="
 ./mvnw clean package -DskipTests
