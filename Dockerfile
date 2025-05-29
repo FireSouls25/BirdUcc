@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y curl gnupg maven \
   && rm -rf /var/lib/apt/lists/*
 
 # Directorio de trabajo dentro del contenedor
-WORKDIR /app
+WORKDIR /app/birducc
 
 # Copia todos los archivos al contenedor
 COPY . .
