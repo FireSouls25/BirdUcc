@@ -1,27 +1,34 @@
 package com.birducc.service;
 
 import com.birducc.dto.MessagePayload;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Service
 public class TelegramService {
 
-    @Value("${telegram.api.url}")
-    private String telegramApiUrl;
+    private final TelegramBot telegramBot;
 
-    @Value("${telegram.bot.token}")
-    private String botToken;
+    public TelegramService(TelegramBot telegramBot) {
+        this.telegramBot = telegramBot;
+    }
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    public void processIncomingMessage(MessagePayload payload) {
+        SendMessage message = new SendMessage();
+        message.setChatId(payload.getChatId());
+        message.setText(payload.getText());
+
+        try {
+            telegramBot.execute(message);
+            System.out.println("✅ Mensaje enviado a Telegram: " + payload.getText());
+        } catch (TelegramApiException e) {
+            System.err.println("❌ Error al enviar mensaje a Telegram: " + e.getMessage());
+        }
+    }
 
     public void sendMessage(MessagePayload payload) {
-        String chatId = payload.getChatId();
-        String text = payload.getText();
-
-        String url = String.format("%s%s/sendMessage?chat_id=%s&text=%s", telegramApiUrl, botToken, chatId, text);
-
-        restTemplate.postForObject(url, null, String.class);
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sendMessage'");
     }
 }

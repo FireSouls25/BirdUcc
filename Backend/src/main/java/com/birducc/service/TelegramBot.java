@@ -16,6 +16,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Value("${telegram.bot.token}")
     private String botToken;
 
+    @Value("${telegram.bot.id}")
+    private String botId;
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     public TelegramBot() {
@@ -33,7 +36,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             payload.setChatId(chatId);
             payload.setText(msg);
 
-            restTemplate.postForObject("http://localhost:8080/telegram/message", payload, String.class);
+            restTemplate.postForObject("http://localhost:3000/telegram/message", payload, String.class);
         }
     }
 

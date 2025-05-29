@@ -3,7 +3,7 @@ package com.birducc.dto;
 public class MessagePayload {
     private String chatId;
     private String text;
-    private String platform; // ← Campo necesario para corregir tu error
+    private String platform; 
 
     // Getters y setters
     public String getChatId() {
