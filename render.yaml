@@ -3,7 +3,7 @@ services:
     name: birducc-backend
     env: java
     plan: free
-    buildCommand: mvn package
+    buildCommand: ./mvnw clean install
     startCommand: java -jar target/*.jar # Cambia a target/*.jar si usas Maven
     envVars:
       - key: TELEGRAM_BOT_TOKEN
@@ -13,4 +13,4 @@ services:
       - key: WHATSAPP_SECRET
         value: 
       - key: SERVER_PORT
-        value: 8080
+        value: 3000
