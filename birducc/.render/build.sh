@@ -1,13 +1,10 @@
 #!/bin/bash
-set -e
+
 echo "=== Entrando al directorio del proyecto ==="
-cd /app
+cd /app/birducc
 
 echo "=== Iniciando build con Maven ==="
-./mvnw clean package -DskipTests
+./mvnw clean package
 
 echo "=== Verificando versión de Java ==="
 java -version
-
-echo "=== Ejecutando la aplicación ==="
-java -jar target/*.jar
