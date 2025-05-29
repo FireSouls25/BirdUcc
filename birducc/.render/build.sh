@@ -8,3 +8,6 @@ echo "=== Iniciando build con Maven ==="
 
 echo "=== Verificando versión de Java ==="
 java -version
+
+echo "=== Ejecutando la aplicación ==="
+java -jar target/*.jar --server.port=$PORT
