@@ -1,0 +1,13 @@
+com\birducc\service\TelegramService.class
+com\birducc\config\WebConfig$1.class
+com\birducc\dto\MessagePayload.class
+com\birducc\service\TelegramBot.class
+com\birducc\controller\MessageController.class
+com\birducc\service\DiscordService.class
+com\birducc\controller\DiscordController.class
+com\birducc\service\MessageService.class
+com\birducc\model\Platform.class
+com\birducc\model\Message.class
+com\birducc\config\WebConfig.class
+com\birducc\controller\TelegramController.class
+com\birducc\BackendApplication.class

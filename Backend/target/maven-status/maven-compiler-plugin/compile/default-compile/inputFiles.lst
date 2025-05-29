@@ -1,0 +1,13 @@
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\BackendApplication.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\controller\TelegramController.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\service\MessageService.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\config\WebConfig.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\dto\MessagePayload.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\service\TelegramService.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\service\DiscordService.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\controller\DiscordController.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\controller\MessageController.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\model\Message.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\model\Platform.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\config\TelegramBotConfig.java
+C:\Users\Manu3l\Desktop\jenkins_real\BirdUcc\Backend\src\main\java\com\birducc\service\TelegramBot.java
