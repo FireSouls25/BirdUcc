@@ -1,21 +1,21 @@
-# Imagen base con Java 17
+# Usa una imagen base con Java 17
 FROM eclipse-temurin:17-jdk
 
 # Instala Node.js 22 y Maven
 RUN apt-get update && apt-get install -y curl gnupg maven \
-  && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-  && apt-get install -y nodejs \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Directorio de trabajo dentro del contenedor
-WORKDIR /app/birducc
+# Directorio de trabajo
+WORKDIR /app
 
-# Copia todos los archivos al contenedor
+# Copia los archivos del proyecto
 COPY . .
 
-# Da permisos de ejecución al script de build
-RUN chmod +x ./.render/build.sh
+# Permisos para scripts
+RUN chmod +x birducc/.render/build.sh
 
-# Ejecuta el script
-CMD ["./.render/build.sh"]
+# Ejecuta el build script
+CMD ["birducc/.render/build.sh"]
