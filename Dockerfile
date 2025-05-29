@@ -1,4 +1,4 @@
-# Usa una imagen de OpenJDK 17 basada en Debian
+# Imagen base con Java 17 y APT (basada en Debian)
 FROM eclipse-temurin:17-jdk
 
 # Instala Node.js 22 y herramientas necesarias
@@ -8,17 +8,14 @@ RUN apt-get update && apt-get install -y curl gnupg \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-# Carpeta de trabajo dentro del contenedor
+# Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia todo tu proyecto
+# Copia todos los archivos al contenedor
 COPY . .
 
-# Da permisos de ejecución al script
+# Da permisos de ejecución al script de build
 RUN chmod +x ./.render/build.sh
 
-# Expone el puerto que usa tu app (ajústalo si es distinto)
-EXPOSE 8080
-
-# Comando por defecto al correr el contenedor
+# Ejecuta el script
 CMD ["./.render/build.sh"]
