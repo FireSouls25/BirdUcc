@@ -17,5 +17,8 @@ COPY . .
 # Da permisos a mvnw y build.sh
 RUN chmod +x mvnw .render/build.sh
 
+# Expón el puerto que Spring Boot usará (Render lo mapea internamente)
+EXPOSE 8080
+
 # Ejecuta el script
 CMD ["./.render/build.sh"]
