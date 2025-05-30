@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
-const TelegramIntegration = () => {
+const DiscordIntegration = () => {
   const [iframeUrl, setIframeUrl] = useState('');
 
   useEffect(() => {
-    // Obtener la URL de Telegram Web
-    const fetchTelegramUrl = async () => {
+    // Obtener la URL de Discord Web
+    const fetchDiscordUrl = async () => {
       try {
-        const response = await fetch('http://localhost:8081/api/telegram/url');
+        const response = await fetch('http://localhost:8081/api/discord/url');
         const data = await response.json();
         setIframeUrl(data.url);
       } catch (error) {
-        console.error('Error fetching Telegram URL:', error);
-        // URL por defecto de Telegram Web
-        setIframeUrl('https://web.telegram.org');
+        console.error('Error fetching Discord URL:', error);
+        // URL por defecto de Discord Web
+        setIframeUrl('https://discord.com/app');
       }
     };
 
-    fetchTelegramUrl();
+    fetchDiscordUrl();
   }, []);
 
   const handleRedirect = () => {
@@ -28,7 +28,7 @@ const TelegramIntegration = () => {
   return (
     <div className="integration-container">
       <div className="integration-header">
-        <h2>Telegram Integration</h2>
+        <h2>Discord Integration</h2>
         <button className="redirect-button" onClick={handleRedirect}>
           <FaExternalLinkAlt /> Abrir en nueva pestaña
         </button>
@@ -37,16 +37,16 @@ const TelegramIntegration = () => {
         {iframeUrl ? (
           <iframe
             src={iframeUrl}
-            title="Telegram Web"
+            title="Discord Web"
             className="embedded-frame"
             allow="camera; microphone"
           />
         ) : (
-          <p>Loading Telegram...</p>
+          <p>Loading Discord...</p>
         )}
       </div>
     </div>
   );
 };
 
-export default TelegramIntegration; 
+export default DiscordIntegration; 

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './App.css'
 import Home from './components/Home'
 import TelegramIntegration from './components/TelegramIntegration'
+import WhatsAppIntegration from './components/WhatsAppIntegration'
+import DiscordIntegration from './components/DiscordIntegration'
 import { FaHome, FaWhatsapp, FaTelegramPlane, FaDiscord } from 'react-icons/fa'
 
 function App() {
@@ -13,6 +15,10 @@ function App() {
         return <Home />
       case 'telegram':
         return <TelegramIntegration />
+      case 'whatsapp':
+        return <WhatsAppIntegration />
+      case 'discord':
+        return <DiscordIntegration />
       default:
         return <Home />
     }
@@ -29,7 +35,7 @@ function App() {
           <FaHome size={24} />
           <span>Home</span>
         </div>
-        <div className="nav-item">
+        <div className="nav-item" onClick={() => setActiveSection('whatsapp')}>
           <FaWhatsapp size={24} color="green" />
           <span>WhatsApp</span>
         </div>
@@ -37,7 +43,7 @@ function App() {
           <FaTelegramPlane size={24} color="#0088CC" />
           <span>Telegram</span>
         </div>
-        <div className="nav-item">
+        <div className="nav-item" onClick={() => setActiveSection('discord')}>
           <FaDiscord size={24} color="#7289DA" />
           <span>Discord</span>
         </div>

@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
-const TelegramIntegration = () => {
+const WhatsAppIntegration = () => {
   const [iframeUrl, setIframeUrl] = useState('');
 
   useEffect(() => {
-    // Obtener la URL de Telegram Web
-    const fetchTelegramUrl = async () => {
+    // Obtener la URL de WhatsApp Web
+    const fetchWhatsAppUrl = async () => {
       try {
-        const response = await fetch('http://localhost:8081/api/telegram/url');
+        const response = await fetch('http://localhost:8081/api/whatsapp/url');
         const data = await response.json();
         setIframeUrl(data.url);
       } catch (error) {
-        console.error('Error fetching Telegram URL:', error);
-        // URL por defecto de Telegram Web
-        setIframeUrl('https://web.telegram.org');
+        console.error('Error fetching WhatsApp URL:', error);
+        // URL por defecto de WhatsApp Web
+        setIframeUrl('https://web.whatsapp.com');
       }
     };
 
-    fetchTelegramUrl();
+    fetchWhatsAppUrl();
   }, []);
 
   const handleRedirect = () => {
@@ -28,7 +28,7 @@ const TelegramIntegration = () => {
   return (
     <div className="integration-container">
       <div className="integration-header">
-        <h2>Telegram Integration</h2>
+        <h2>WhatsApp Integration</h2>
         <button className="redirect-button" onClick={handleRedirect}>
           <FaExternalLinkAlt /> Abrir en nueva pestaña
         </button>
@@ -37,16 +37,16 @@ const TelegramIntegration = () => {
         {iframeUrl ? (
           <iframe
             src={iframeUrl}
-            title="Telegram Web"
+            title="WhatsApp Web"
             className="embedded-frame"
             allow="camera; microphone"
           />
         ) : (
-          <p>Loading Telegram...</p>
+          <p>Loading WhatsApp...</p>
         )}
       </div>
     </div>
   );
 };
 
-export default TelegramIntegration; 
+export default WhatsAppIntegration; 
