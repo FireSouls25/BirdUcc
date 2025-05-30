@@ -10,4 +10,4 @@ echo "=== Verificando versión de Java ==="
 java -version
 
 echo "=== Ejecutando la aplicación ==="
-java -jar target/*.jar 
+java -Dserver.port=$PORT -jar target/*.jar
