@@ -1,57 +1,173 @@
-# 🐦 BirdUcc - Plataforma de mensajería multiplataforma
+# 🐦 BirdUcc - Plataforma de Mensajería Multiplataforma
 
-**BirdUcc** es un sistema de mensajería modular que busca unificar múltiples plataformas de comunicación como WhatsApp, Telegram, y SMS bajo una misma interfaz lógica.
+## 📋 Descripción
+BirdUcc es un sistema de mensajería modular que unifica múltiples plataformas de comunicación (WhatsApp, Telegram, SMS) bajo una única interfaz. El proyecto está construido siguiendo patrones de diseño de software y una arquitectura modular.
 
-> 🎯 Proyecto en desarrollo - Estructura inicial basada en patrones de diseño de software (POO en Java)
+## **Backend 1 (rama main)**
 
----
+## 🛠️ Tecnologías Utilizadas
 
-## 🚀 Objetivo
+### Backend
+- Java 17
+- Spring Boot 3.2.3
+- Spring Security
+- Spring Data JPA
+- H2 Database
+- JWT para autenticación
+- Telegram Bots API
+- Lombok
+- Maven
 
-BirdUcc permitirá a los usuarios:
+### Frontend
+- React
+- TypeScript
+- HTML/CSS
 
-- Enviar y recibir mensajes desde diferentes servicios de mensajería.
-- Interactuar desde una única interfaz lógica desacoplada del proveedor.
-- Agregar nuevas plataformas fácilmente gracias a su arquitectura extensible. (Quizas)
+### Herramientas de Desarrollo
+- Node.js
+- npm
+- Maven
 
----
+## 📥 Requisitos Previos
 
-## 🧠 Arquitectura (Patrones de diseño)
+1. Java Development Kit (JDK) 17 o superior
+2. Node.js y npm
+3. Maven
+4. Git
 
-Este proyecto aplica 3 patrones principales:
+## 🚀 Pasos para Clonar y Ejecutar el Proyecto
 
-- **Adapter**: Para adaptar APIs externas como WhatsApp, Telegram o servicios SMS al sistema interno.
-- **Bridge**: Para separar la lógica de mensajería del front-end o interfaz de control.
-- **Abstract Factory**: Para crear familias de objetos (Cliente, Chat, Notificador) según la plataforma objetivo.
+### 1. Clonar el Repositorio
+```bash
+git clone https://github.com/FireSouls25/BirdUcc.git
+cd BirdUcc
+```
 
-> Esta combinación permite mantener un sistema escalable, flexible y fácil de probar.
+### 2. Configurar el Backend
+```bash
+cd Backend
+mvn clean install
+mvn spring-boot:run
+```
 
----
+### 3. Configurar el Frontend
+```bash
+cd Frontend
+npm install
+npm start
+```
 
-## 🗂️ Estructuras de datos planeadas
+## 🔧 Configuración Adicional
 
-- ¿?
+### Backend
+- El backend utiliza una base de datos H2 en memoria por defecto
+- La documentación de la API está disponible en `/swagger-ui.html` cuando el servidor está en ejecución
+- Se requiere configurar las credenciales de Telegram Bot en el archivo de propiedades
 
----
+### Frontend
+- El frontend se ejecuta por defecto en `http://localhost:3000`
+- Asegúrate de que el backend esté corriendo en el puerto correcto (por defecto 8080)
 
-## 🔧 Tecnologías iniciales
+## 📁 Estructura del Proyecto
+```
+BirdUcc/
+├── Backend/           # Servidor Spring Boot
+├── Frontend/         # Aplicación React
+└── whatsapp-service/ # Servicio de WhatsApp
+```
 
-- Lenguaje: **Java** para Backend usando Spring Boot | **typescript** para Frontend usando React 
-- Estilo: **Programación Orientada a Objetos (POO)**
+## 🔐 Variables de Entorno
+El proyecto requiere configurar las siguientes variables de entorno:
 
----
+- `22768079`: Token para el bot de Telegram
+- `a686b8b2577b739fa0d025ad4ed72813`: Clave secreta para la generación de tokens JWT
 
-## 📅 Estado actual
+## 📝 Notas Adicionales
+- Se recomienda usar Java 17 o superior para el backend
+- Asegúrate de tener todas las dependencias instaladas antes de ejecutar el proyecto
 
-- [x] Idea definida  
-- [ ] Esquema de clases inicial  
-- [ ] Implementación del núcleo  
-- [ ] Adaptadores para plataformas reales  
-- [ ] Interfaz gráfica
+## **Backend 2 (rama backend-alternativa)**
 
+## 🚀 Tecnologías Utilizadas
 
-## 📄 Licencia
+### Frontend
+- React 19
+- TypeScript
+- Vite
+- Axios
+- React Icons
+- Telegram Web App SDK
 
-Este proyecto es de uso educativo y experimental.  
-Licencia a definir.
+### Backend
+- Spring Boot 3.5.0
+- Spring Security
+- Spring Data MongoDB
+- Spring WebSocket
+- Telegram Bots API
+- Discord JDA
 
+## 📋 Prerrequisitos
+
+- Java 17 o superior
+- Node.js y npm
+- MongoDB
+- Maven
+- Credenciales de desarrollador para:
+  - Telegram Bot
+  - Discord Application
+  - WhatsApp Business API
+
+(estan puestas en codigo)
+
+## 🔧 Instalación
+
+1. **Clonar el repositorio**
+```bash
+git clone --branch backend-alternativa --single-branch https://github.com/FireSouls25/BirdUcc.git
+cd BirdUcc
+```
+
+2. **Configurar el Backend**
+```bash
+cd birducc
+mvn clean install
+```
+
+3. **Configurar el Frontend**
+```bash
+cd birdpage
+npm install
+```
+
+## 🚀 Ejecución
+
+1. **Iniciar el Backend**
+```bash
+cd birducc
+mvn spring-boot:run
+```
+El backend estará disponible en `http://localhost:8081`
+
+2. **Iniciar el Frontend**
+```bash
+cd birdpage
+npm run dev
+```
+El frontend estará disponible en `http://localhost:5173`
+
+## 📱 Características
+
+- Integración con WhatsApp, Telegram y Discord
+- Interfaz unificada para todas las plataformas
+- Sistema de autenticación y autorización
+- Almacenamiento de mensajes en MongoDB
+- Comunicación en tiempo real mediante WebSocket
+- Soporte para mensajes de texto, imágenes y archivos
+- Gestión de contactos y conversaciones
+
+## 🙏 Agradecimientos
+
+- Spring Boot Team
+- React Team
+- MongoDB Team
+- Telegram y Discord
