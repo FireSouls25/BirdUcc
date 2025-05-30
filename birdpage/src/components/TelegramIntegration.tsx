@@ -5,7 +5,6 @@ const TelegramIntegration = () => {
   const [iframeUrl, setIframeUrl] = useState('');
 
   useEffect(() => {
-    // Obtener la URL de Telegram Web
     const fetchTelegramUrl = async () => {
       try {
         const response = await fetch('http://localhost:8081/api/telegram/url');
@@ -13,7 +12,6 @@ const TelegramIntegration = () => {
         setIframeUrl(data.url);
       } catch (error) {
         console.error('Error fetching Telegram URL:', error);
-        // URL por defecto de Telegram Web
         setIframeUrl('https://web.telegram.org');
       }
     };

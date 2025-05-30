@@ -5,7 +5,6 @@ const WhatsAppIntegration = () => {
   const [iframeUrl, setIframeUrl] = useState('');
 
   useEffect(() => {
-    // Obtener la URL de WhatsApp Web
     const fetchWhatsAppUrl = async () => {
       try {
         const response = await fetch('http://localhost:8081/api/whatsapp/url');
@@ -13,7 +12,6 @@ const WhatsAppIntegration = () => {
         setIframeUrl(data.url);
       } catch (error) {
         console.error('Error fetching WhatsApp URL:', error);
-        // URL por defecto de WhatsApp Web
         setIframeUrl('https://web.whatsapp.com');
       }
     };

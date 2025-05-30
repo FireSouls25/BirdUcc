@@ -5,7 +5,6 @@ const DiscordIntegration = () => {
   const [iframeUrl, setIframeUrl] = useState('');
 
   useEffect(() => {
-    // Obtener la URL de Discord Web
     const fetchDiscordUrl = async () => {
       try {
         const response = await fetch('http://localhost:8081/api/discord/url');
@@ -13,7 +12,6 @@ const DiscordIntegration = () => {
         setIframeUrl(data.url);
       } catch (error) {
         console.error('Error fetching Discord URL:', error);
-        // URL por defecto de Discord Web
         setIframeUrl('https://discord.com/app');
       }
     };

@@ -34,14 +34,11 @@ public class TelegramService extends TelegramLongPollingBot {
     private String frontendUrl;
     
     public String generateAuthUrl() {
-        // This would generate a URL for the user to authenticate with Telegram
         return String.format("https://oauth.telegram.org/auth?bot_id=%s&origin=%s&return_to=%s/auth/telegram/callback",
                 telegramConfig.getApiId(), frontendUrl, frontendUrl);
     }
     
     public void handleAuthCallback(String code, User user) {
-        // Handle the authentication callback from Telegram
-        // Store the session information in the user object
         user.setTelegramConnected(true);
         user.setTelegramSession(code);
     }
@@ -63,7 +60,6 @@ public class TelegramService extends TelegramLongPollingBot {
         message.setUserId(userId);
         message.setChatId(chatId);
 
-        // Enviar mensaje a través de la API de Telegram
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(text);
