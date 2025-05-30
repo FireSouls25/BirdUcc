@@ -54,7 +54,7 @@ mvn spring-boot:run
 ```bash
 cd Frontend
 npm install
-npm start
+npm run dev
 ```
 
 ## 🔧 Configuración Adicional
@@ -77,7 +77,7 @@ BirdUcc/
 ```
 
 ## 🔐 Variables de Entorno
-El proyecto requiere configurar las siguientes variables de entorno:
+El proyecto requiere configurar las siguientes variables de entorno en un archivo .env:
 
 - `22768079`: Token para el bot de Telegram
 - `a686b8b2577b739fa0d025ad4ed72813`: Clave secreta para la generación de tokens JWT
