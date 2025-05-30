@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import TelegramWebApp from '@twa-dev/sdk';
+import React, { useState, useEffect, useRef } from 'react';
+import { DoubleLinkedList } from './structures/DoubleLinkedList';
+import { Queue } from './structures/Queue';
+import { Tree } from './structures/Tree';
+import { CircularDoublyLinkedList } from './structures/CircularDoublyLinkedList';
+import { Graph } from './structures/Graph';
+import { Stack } from './structures/Stack';
 import './TelegramIntegration.css';
 
 // Extender la interfaz Window para incluir Telegram
@@ -16,137 +21,176 @@ interface Message {
   text: string;
   sender: string;
   timestamp: Date;
-  chatId: string;
-  userId: string;
+}
+
+interface User {
+  id: string;
+  name: string;
+  isActive: boolean;
+}
+
+interface NavigationNode {
+  id: string;
+  name: string;
+  path: string;
+}
+
+interface ChatAction {
+  type: 'send' | 'delete' | 'edit';
+  message: Message;
+  timestamp: Date;
 }
 
 const TelegramIntegration: React.FC = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [newMessage, setNewMessage] = useState('');
+  const [messages, setMessages] = useState<DoubleLinkedList<Message>>(new DoubleLinkedList());
+  const [newMessageQueue] = useState<Queue<Message>>(new Queue());
+  const [navigationTree] = useState<Tree<NavigationNode>>(new Tree());
+  const [activeUsers] = useState<CircularDoublyLinkedList<User>>(new CircularDoublyLinkedList());
+  const [userConnections] = useState<Graph<User>>(new Graph());
+  const [actionHistory] = useState<Stack<ChatAction>>(new Stack());
+  const [inputMessage, setInputMessage] = useState('');
   const [isConnected, setIsConnected] = useState(false);
-  const [userId, setUserId] = useState<string | null>(null);
-  const [isTelegramWebApp, setIsTelegramWebApp] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Verificar si estamos en el contexto de Telegram Web App
-    const isTelegram = window.Telegram?.WebApp !== undefined;
-    setIsTelegramWebApp(isTelegram);
+    // Inicializar el árbol de navegación
+    const root = navigationTree.setRoot({ id: 'root', name: 'Home', path: '/' });
+    const chatNode = new TreeNode({ id: 'chat', name: 'Chat', path: '/chat' });
+    const settingsNode = new TreeNode({ id: 'settings', name: 'Settings', path: '/settings' });
+    root.addChild(chatNode);
+    root.addChild(settingsNode);
 
-    if (isTelegram) {
+    // Inicializar usuarios de ejemplo
+    const users: User[] = [
+      { id: '1', name: 'Usuario 1', isActive: true },
+      { id: '2', name: 'Usuario 2', isActive: true },
+      { id: '3', name: 'Usuario 3', isActive: false }
+    ];
+
+    users.forEach(user => {
+      activeUsers.add(user);
+      userConnections.addNode(user);
+    });
+
+    // Crear algunas conexiones entre usuarios
+    userConnections.addEdge(users[0], users[1]);
+    userConnections.addEdge(users[1], users[2]);
+
+    // Simular conexión con Telegram
+    const connectToTelegram = async () => {
       try {
-        // Inicializar la Web App de Telegram
-        TelegramWebApp.ready();
-        TelegramWebApp.expand();
-        
-        // Obtener el ID del usuario de Telegram
-        const tgUser = TelegramWebApp.initDataUnsafe?.user;
-        if (tgUser?.id) {
-          setUserId(tgUser.id.toString());
-          setIsConnected(true);
-          fetchMessages(tgUser.id.toString());
-        }
+        setIsConnected(true);
       } catch (error) {
-        console.error('Error initializing Telegram Web App:', error);
+        console.error('Error connecting to Telegram:', error);
       }
-    }
+    };
+
+    connectToTelegram();
   }, []);
 
-  const fetchMessages = async (uid: string) => {
-    try {
-      const response = await fetch(`http://localhost:8081/api/telegram/messages/${uid}`);
-      if (response.ok) {
-        const data = await response.json();
-        setMessages(data);
-      }
-    } catch (error) {
-      console.error('Error fetching messages:', error);
-    }
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const sendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newMessage.trim() || !userId) return;
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
-    try {
-      const response = await fetch('http://localhost:8081/api/telegram/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: newMessage,
-          userId: userId,
-          chatId: isTelegramWebApp ? TelegramWebApp.initDataUnsafe?.chat?.id.toString() : userId
-        }),
+  const handleSendMessage = async () => {
+    if (!inputMessage.trim()) return;
+
+    const newMessage: Message = {
+      id: Date.now().toString(),
+      text: inputMessage,
+      sender: 'user',
+      timestamp: new Date(),
+    };
+
+    // Agregar mensaje a la cola
+    newMessageQueue.enqueue(newMessage);
+    
+    // Procesar mensaje de la cola
+    const message = newMessageQueue.dequeue();
+    if (message) {
+      const updatedMessages = new DoubleLinkedList<Message>();
+      messages.toArray().forEach(msg => updatedMessages.add(msg));
+      updatedMessages.add(message);
+      setMessages(updatedMessages);
+
+      // Guardar acción en el historial
+      actionHistory.push({
+        type: 'send',
+        message,
+        timestamp: new Date()
       });
-
-      if (response.ok) {
-        const sentMessage = await response.json();
-        setMessages(prev => [...prev, sentMessage]);
-        setNewMessage('');
-      }
-    } catch (error) {
-      console.error('Error sending message:', error);
     }
+
+    setInputMessage('');
   };
 
-  if (!isConnected) {
-    return (
-      <div className="telegram-connect">
-        <h2>Connect with Telegram</h2>
-        {isTelegramWebApp ? (
-          <p>Please wait while we connect to Telegram...</p>
-        ) : (
-          <div>
-            <p>To use the chat, please open this page in Telegram:</p>
-            <a 
-              href="https://t.me/BIRDUCC_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="telegram-link"
-            >
-              Open in Telegram
-            </a>
-          </div>
-        )}
-      </div>
-    );
-  }
+  const handleUndo = () => {
+    const lastAction = actionHistory.pop();
+    if (lastAction && lastAction.type === 'send') {
+      const updatedMessages = new DoubleLinkedList<Message>();
+      messages.toArray()
+        .filter(msg => msg.id !== lastAction.message.id)
+        .forEach(msg => updatedMessages.add(msg));
+      setMessages(updatedMessages);
+    }
+  };
 
   return (
     <div className="telegram-container">
       <div className="chat-header">
         <h2>Telegram Chat</h2>
+        <div className="active-users">
+          {activeUsers.toArray().map(user => (
+            <span key={user.id} className={`user ${user.isActive ? 'active' : ''}`}>
+              {user.name}
+            </span>
+          ))}
+        </div>
       </div>
-      
       <div className="messages-container">
-        {messages.map((message) => (
+        {messages.toArray().map((message) => (
           <div
             key={message.id}
-            className={`message ${message.sender === userId ? 'sent' : 'received'}`}
+            className={`message ${message.sender === 'user' ? 'sent' : 'received'}`}
           >
             <div className="message-content">
-              <p>{message.text}</p>
+              {message.text}
               <span className="message-time">
-                {new Date(message.timestamp).toLocaleTimeString()}
+                {message.timestamp.toLocaleTimeString()}
               </span>
             </div>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
-
-      <form onSubmit={sendMessage} className="message-form">
+      <div className="message-form">
+        <button
+          className="undo-button"
+          onClick={handleUndo}
+          disabled={actionHistory.isEmpty()}
+        >
+          Deshacer
+        </button>
         <input
           type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Type a message..."
           className="message-input"
+          value={inputMessage}
+          onChange={(e) => setInputMessage(e.target.value)}
+          placeholder="Type a message..."
+          onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
         />
-        <button type="submit" className="send-button">
+        <button
+          className="send-button"
+          onClick={handleSendMessage}
+          disabled={!isConnected}
+        >
           Send
         </button>
-      </form>
+      </div>
     </div>
   );
 };
