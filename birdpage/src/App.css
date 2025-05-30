@@ -1,8 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #c0bad4; /* Nuevo color de fondo unificado, un poco más oscuro */
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  /* Eliminamos o ajustamos estos estilos ya que el App manejará el layout */
+  max-width: none; /* Eliminar ancho máximo */
+  margin: 0; /* Eliminar margen */
+  padding: 0; /* Eliminar padding */
+  text-align: left; /* Alinear texto a la izquierda si es necesario */
 }
 
 .logo {
@@ -43,33 +50,106 @@
 
 .App {
   display: flex;
+  height: 100vh; /* Ocupa toda la altura de la ventana */
 }
 
-.sidebar {
-  width: 60px; /* Collapsed width */
-  background-color: #f0f0f0;
-  transition: width 0.3s ease;
-  overflow: hidden;
-  padding-top: 20px; /* Adjust as needed */
+.nav-panel {
+  width: 30%; /* Ajusta el ancho según sea necesario, menos de la mitad */
+  padding: 20px;
+  box-sizing: border-box; /* Incluir padding en el ancho */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinea los elementos a la izquierda */
+  border-right: 1px solid #ccc; /* Opcional: añade un borde para separar */
 }
 
-.sidebar.expanded {
-  width: 200px; /* Expanded width */
+.nav-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.content {
+.nav-header .app-logo {
+  height: 80px; /* Duplicar el tamaño del logo */
+  margin-left: 10px; /* Espacio a la izquierda del logo (aproximadamente 1 cm) */
+  margin-right: 10px; /* Espacio entre el logo y el título */
+  /* Eliminamos margin-right ya que el logo está a la derecha del texto */
+}
+
+.nav-panel h2 {
+  margin-top: 0;
+  margin-bottom: 0; /* Eliminamos el margen inferior ya que el nav-header lo maneja */
+  color: #5e3b90; /* Color para el título BirdUcc */
+  font-size: 3em; /* Duplicar el tamaño de la fuente */
+}
+
+.main-content {
   flex-grow: 1;
   padding: 20px;
+  box-sizing: border-box; /* Incluir padding en el ancho */
+  background-color: #c0bad4; /* Nuevo color de fondo unificado, un poco más oscuro */
 }
 
-.sidebar-item {
+.home-content {
+  text-align: center; /* Centra el texto y elementos inline/inline-block */
+  padding-top: 50px; /* Añade algo de espacio superior si es necesario */
+}
+
+.home-content h1 {
+    margin-bottom: 10px; /* Espacio entre el título y el subtítulo */
+    color: #000; /* Cambiar el color del texto a negro */
+}
+
+.home-content p {
+    margin-bottom: 20px; /* Espacio entre el subtítulo y el input */
+}
+
+.nav-item {
   padding: 10px;
   cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: flex;
+  align-items: center; /* Alinea verticalmente icono y texto */
+  margin-bottom: 10px; /* Espacio entre elementos de navegación */
+  color: #333; /* Color de texto para los elementos de navegación */
+  border-radius: 5px; /* Bordes redondeados para los elementos */
 }
 
-.sidebar-item:hover {
-  background-color: #e0e0e0;
+.nav-item svg {
+  margin-right: 10px; /* Espacio entre icono y texto */
+}
+
+.nav-item:hover {
+  background-color: #d8bfd8; /* Color de fondo al pasar el ratón */
+  color: #fff; /* Color de texto al pasar el ratón */
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px;
+  background-color: #e6e6fa; /* Color similar al del panel lateral */
+  color: #333;
+  /* Añade más estilos si es necesario para que se parezca a la imagen */
+}
+
+.ucc-info {
+  margin-top: auto; /* Empuja este elemento al final del contenedor flex */
+  display: flex;
+  align-items: center;
+  padding-top: 20px; /* Espacio por encima */
+  border-top: 1px solid #ccc; /* Opcional: una línea separadora */
+  width: 100%; /* Asegura que ocupe todo el ancho para centrar si es necesario */
+  justify-content: center; /* Centra el contenido horizontalmente */
+}
+
+.ucc-info .ucc-logo {
+  height: 80px; /* Duplicar el tamaño del logo UCC */
+  margin-right: 10px; /* Espacio entre el logo y el texto */
+}
+
+.ucc-info p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #000; /* Color de texto negro */
 }

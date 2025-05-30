@@ -2,10 +2,10 @@ import React from 'react';
 
 function Home() {
   return (
-    <div>
-      <h1>Bienvenido a su centro de mensajería</h1>
+    <div className="home-content">
+      <h1>Bienvenido a BirdUcc emepezemos una conversacion.</h1>
       <p>Todas sus conversaciones en un solo lugar</p>
-      <input type="text" placeholder="Buscar mensajes" />
+      <input type="text" placeholder="Buscar mensajes" className="search-input" />
     </div>
   );
 }

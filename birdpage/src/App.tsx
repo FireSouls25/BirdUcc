@@ -5,7 +5,6 @@ import TelegramIntegration from './components/TelegramIntegration'
 import { FaHome, FaWhatsapp, FaTelegramPlane, FaDiscord } from 'react-icons/fa'
 
 function App() {
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
   const renderContent = () => {
@@ -21,25 +20,33 @@ function App() {
 
   return (
     <div className="App">
-      <div 
-        className={`sidebar ${isSidebarExpanded ? 'expanded' : ''}`}
-        onMouseEnter={() => setIsSidebarExpanded(true)}
-        onMouseLeave={() => setIsSidebarExpanded(false)}
-      >
-        <div className="sidebar-item" onClick={() => setActiveSection('home')}>
-          {isSidebarExpanded ? 'Home' : <FaHome size={24} />}
+      <div className="nav-panel">
+        <div className="nav-header">
+          <h2>BirdUcc</h2>
+          <img src="/logobird.png" alt="BirdUcc Logo" className="app-logo" />
         </div>
-        <div className="sidebar-item">
-          {isSidebarExpanded ? 'WhatsApp' : <FaWhatsapp size={24} color="green" />}
+        <div className="nav-item" onClick={() => setActiveSection('home')}>
+          <FaHome size={24} />
+          <span>Home</span>
         </div>
-        <div className="sidebar-item" onClick={() => setActiveSection('telegram')}>
-          {isSidebarExpanded ? 'Telegram' : <FaTelegramPlane size={24} color="#0088CC" />}
+        <div className="nav-item">
+          <FaWhatsapp size={24} color="green" />
+          <span>WhatsApp</span>
         </div>
-        <div className="sidebar-item">
-          {isSidebarExpanded ? 'Discord' : <FaDiscord size={24} color="#7289DA" />}
+        <div className="nav-item" onClick={() => setActiveSection('telegram')}>
+          <FaTelegramPlane size={24} color="#0088CC" />
+          <span>Telegram</span>
+        </div>
+        <div className="nav-item">
+          <FaDiscord size={24} color="#7289DA" />
+          <span>Discord</span>
+        </div>
+        <div className="ucc-info">
+          <img src="/ucc_logo.png" alt="UCC Logo" className="ucc-logo" />
+          <p>INGENIERIA SOFTWARE</p>
         </div>
       </div>
-      <div className="content">
+      <div className="main-content">
         {renderContent()}
       </div>
     </div>
