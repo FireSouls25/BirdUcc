@@ -15,7 +15,7 @@ WORKDIR /app/birducc
 COPY . .
 
 # Da permisos a mvnw y build.sh
-RUN chmod +x mvnw build.sh
+RUN chmod +x mvnw .render/build.sh
 
 # Expón el puerto que Spring Boot usará (Render lo mapea internamente)
 EXPOSE 8080
